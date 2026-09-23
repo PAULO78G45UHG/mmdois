@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Murder Mystery 2 - Roblox Web Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- TELA DE SELEÇÃO DE DISPOSITIVO (INTRO) -->
+    <div id="device-screen" class="overlay">
+        <div class="device-box">
+            <h2>ESCOLHA SEU DISPOSITIVO</h2>
+            <div class="device-buttons">
+                <button class="btn-device" onclick="selectDevice('desktop')">💻 PC / Laptop</button>
+                <button class="btn-device" onclick="selectDevice('mobile')">📱 Mobile / Tablet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TELA PRINCIPAL / HUD -->
+    <div id="game-ui" class="hidden">
+        
+        <!-- BARRA SUPERIOR (LEVEL, MOEDAS, TIMER) -->
+        <header id="hud-top">
+            <div class="stat-box level-box">
+                <span class="label">LEVEL</span>
+                <span id="player-level">1</span>
+                <div class="xp-bar"><div id="xp-fill"></div></div>
+            </div>
+
+            <div id="timer-box">
+                <span id="game-state">Aguardando...</span>
+                <span id="game-timer">02:00</span>
+            </div>
+
+            <div class="stat-box coins-box">
+                <span class="label">MOEDAS</span>
+                <span id="player-coins">0</span>
+            </div>
+        </header>
+
+        <!-- MENU LATERAL (INVENTÁRIO, LOJA, GAMEPASS) -->
+        <nav id="sidebar">
+            <button onclick="openTab('inventory')">🎒 INVENTÁRIO</button>
+            <button onclick="openTab('shop')">🛒 LOJA</button>
+            <button onclick="openTab('gamepass')">⭐ GAMEPASSES</button>
+        </nav>
+
+        <!-- ÁREA DO CANVAS (ONDE O JOGO RENDERIZA) -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- TELA DE VOTAÇÃO DE MAPA -->
+        <div id="map-voting" class="overlay hidden">
+            <h3>VOTE NO PRÓXIMO MAPA</h3>
+            <div class="map-list">
+                <div class="map-card" onclick="voteMap('Bank')">
+                    <img src="https://via.placeholder.com/150?text=Bank" alt="Bank">
+                    <span>Bank</span>
+                </div>
+                <div class="map-card" onclick="voteMap('Hospital')">
+                    <img src="https://via.placeholder.com/150?text=Hospital" alt="Hospital">
+                    <span>Hospital</span>
+                </div>
+                <div class="map-card" onclick="voteMap('Mansion')">
+                    <img src="https://via.placeholder.com/150?text=Mansion" alt="Mansion">
+                    <span>Mansion</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- JANELAS MODAIS (INVENTÁRIO, LOJA, GAMEPASS) -->
+        <div id="modal-screen" class="overlay hidden">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal()">X</button>
+                
+                <!-- ABA INVENTÁRIO -->
+                <div id="tab-inventory" class="tab-content hidden">
+                    <h2>SEU INVENTÁRIO</h2>
+                    <div class="sub-tabs">
+                        <button onclick="filterInv('knives')">Facas</button>
+                        <button onclick="filterInv('guns')">Armas</button>
+                        <button onclick="filterInv('effects')">Efeitos</button>
+                    </div>
+                    <div id="inventory-grid" class="item-grid"></div>
+                </div>
+
+                <!-- ABA LOJA -->
+                <div id="tab-shop" class="tab-content hidden">
+                    <h2>LOJA DE ITENS & CAIXAS</h2>
+                    <div id="shop-grid" class="item-grid"></div>
+                </div>
+
+                <!-- ABA GAMEPASSES -->
+                <div id="tab-gamepass" class="tab-content hidden">
+                    <h2>GAMEPASSES</h2>
+                    <div id="gamepass-grid" class="item-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTROLES MOBILE (JOYSTICK / BOTÕES) -->
+        <div id="mobile-controls" class="hidden">
+            <div id="joystick-zone"></div>
+            <button id="btn-action">USAR ITEM</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
